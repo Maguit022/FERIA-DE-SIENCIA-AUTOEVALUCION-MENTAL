@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from utils import calcular_resultado
 import sqlite3
+import os
 
 app = Flask(__name__)
 
@@ -42,21 +43,17 @@ def estadisticas():
     conn = sqlite3.connect('resultados.db')
     cursor = conn.cursor()
 
-    # Traemos la cantidad por nivel (tal como está guardado)
     cursor.execute('SELECT nivel, COUNT(*) FROM resultados GROUP BY nivel')
     datos = cursor.fetchall()
 
-    # Total tests realizados
     cursor.execute('SELECT COUNT(*) FROM resultados')
     total_tests = cursor.fetchone()[0] or 0
 
-    # Promedio puntaje
     cursor.execute('SELECT AVG(puntaje) FROM resultados')
     promedio_puntaje = cursor.fetchone()[0] or 0
 
     conn.close()
 
-    # Diccionario para mapear niveles guardados en DB a etiquetas que usaremos
     claves = {
         'ansiedad mínima': 'Bajo',
         'ansiedad moderada': 'Moderado',
@@ -64,10 +61,8 @@ def estadisticas():
         'ansiedad muy severa': 'Muy alto'
     }
 
-    # Inicializamos las estadísticas con cero para cada nivel
     estadisticas = {valor: 0 for valor in claves.values()}
 
-    # Normalizamos los niveles para que coincidan con las claves
     for nivel, cantidad in datos:
         nivel_normalizado = nivel.lower().strip()
         if nivel_normalizado in claves:
@@ -81,4 +76,5 @@ def estadisticas():
                            promedio_puntaje=promedio_puntaje)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
