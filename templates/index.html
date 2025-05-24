@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Test de Ansiedad - GAD-7</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #006064;
+            margin-bottom: 40px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .pregunta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        label {
+            min-width: 130px;
+            font-weight: 600;
+            color: #004d40;
+        }
+
+        select {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #26c6da;
+            box-shadow: 0 0 5px rgba(38, 198, 218, 0.5);
+        }
+
+        button {
+            width: 100%;
+            background-color: #00796b;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        #btn-estadisticas {
+            max-width: 600px;
+            display: block;
+            margin: 0 auto;
+            background-color: #0288d1;
+            padding: 12px;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        #btn-estadisticas:hover {
+            background-color: #01579b;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Autoevaluación de Ansiedad (GAD-7)</h1>
+    <form action="/resultado" method="post">
+        {% set preguntas = [
+            "Sentirse nervioso, ansioso o al límite",
+            "No poder parar o controlar la preocupación",
+            "Preocuparse demasiado por diferentes cosas",
+            "Tener dificultades para relajarse",
+            "Estar tan inquieto que es difícil quedarse sentado",
+            "Ponerse fácilmente molesto o irritable",
+            "Sentirse miedo como si algo terrible fuera a pasar"
+        ] %}
+        {% for i in range(7) %}
+            <div class="pregunta">
+                <label for="q{{ i + 1 }}">{{ preguntas[i] }}</label>
+                <select id="q{{ i + 1 }}" name="q{{ i + 1 }}" required>
+                    <option value="0">Nunca</option>
+                    <option value="1">A veces</option>
+                    <option value="2">Frecuentemente</option>
+                    <option value="3">Siempre</option>
+                </select>
+            </div>
+        {% endfor %}
+        <button type="submit">Enviar</button>
+    </form>
+
+    <button id="btn-estadisticas" onclick="window.location.href='/estadisticas'">
+        Ver Estadísticas
+    </button>
+</body>
+</html>

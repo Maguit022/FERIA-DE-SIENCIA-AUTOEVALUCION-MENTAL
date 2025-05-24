@@ -1,0 +1,100 @@
+/* Estilo base del cuerpo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #ffffff);
+    margin: 0;
+    padding: 40px 20px;
+    color: #333;
+}
+
+/* Título principal */
+h1 {
+    text-align: center;
+    color: #006064;
+    margin-bottom: 40px;
+}
+
+/* Estilo del formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de cada pregunta */
+.pregunta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+/* Etiqueta de las preguntas */
+label {
+    min-width: 130px;
+    font-weight: 600;
+    color: #004d40;
+}
+
+/* Selector de respuestas */
+select {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    border-color: #26c6da;
+    box-shadow: 0 0 5px rgba(38, 198, 218, 0.5);
+}
+
+/* Botón de envío */
+button {
+    width: 100%;
+    background-color: #00796b;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #004d40;
+}
+
+/* Botón de estadísticas */
+#btn-estadisticas {
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+    background-color: #0288d1;
+    padding: 12px;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+#btn-estadisticas:hover {
+    background-color: #01579b;
+}
+
+/* Estilo para el logo */
+#logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 60px;
+}
